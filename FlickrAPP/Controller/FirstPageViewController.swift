@@ -24,6 +24,12 @@ class FirstPageViewController: UIViewController {
     }
     
     @IBAction func onSearchPressed(_ sender: Any) {
+        let limitNumber = Int(limitField.text ?? "0")
+        if limitNumber ?? 0 < 20 {
+            showAlert(title: "等等...", message: "每頁呈現數量不要低於20喔!")
+        } else {
+            performSegue(withIdentifier: "showResultSegue", sender: nil)
+        }
     }
     
     override func viewDidLoad() {

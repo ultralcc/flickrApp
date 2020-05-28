@@ -6,6 +6,7 @@ target 'FlickrAPP' do
   use_frameworks!
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'Alamofire', '~> 5.2'
+  pod 'XMLMapper'  
   # Pods for FlickrAPP
 
 end
