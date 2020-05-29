@@ -110,31 +110,42 @@
                                             <rect key="frame" x="0.0" y="0.0" width="196" height="198"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ejH-Ul-pOU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="196" height="193"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8b-2q-Pjx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="196" height="198"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JSo-sY-XPc" customClass="CustomImageView" customModule="FlickrAPP" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="196" height="167.5"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNE-e6-uPB">
-                                                            <rect key="frame" x="77" y="172.5" width="42" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="NNE-e6-uPB">
+                                                            <rect key="frame" x="5" y="178" width="186" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="0L8-5E-UjF"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JSo-sY-XPc" customClass="CustomImageView" customModule="FlickrAPP" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="196" height="173"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </imageView>
                                                     </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ejH-Ul-pOU" secondAttribute="height" multiplier="1:1" id="Ej0-39-mYf"/>
-                                                        <constraint firstAttribute="width" constant="100" id="x1B-pT-qdl"/>
+                                                        <constraint firstItem="JSo-sY-XPc" firstAttribute="top" secondItem="H8b-2q-Pjx" secondAttribute="top" id="1Ij-kY-KbE"/>
+                                                        <constraint firstItem="JSo-sY-XPc" firstAttribute="leading" secondItem="H8b-2q-Pjx" secondAttribute="leading" id="1gG-kW-kCD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JSo-sY-XPc" secondAttribute="trailing" id="H1q-Tp-77L"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NNE-e6-uPB" secondAttribute="bottom" id="OnV-aA-8p2"/>
+                                                        <constraint firstAttribute="width" secondItem="H8b-2q-Pjx" secondAttribute="height" multiplier="1:1" id="Zvo-x3-dMf"/>
+                                                        <constraint firstAttribute="width" constant="100" id="cPM-7j-yFP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="NNE-e6-uPB" secondAttribute="trailing" constant="5" id="f6f-4Y-26Z"/>
+                                                        <constraint firstItem="NNE-e6-uPB" firstAttribute="leading" secondItem="H8b-2q-Pjx" secondAttribute="leading" constant="5" id="k6c-gF-LB0"/>
+                                                        <constraint firstItem="NNE-e6-uPB" firstAttribute="top" secondItem="JSo-sY-XPc" secondAttribute="bottom" constant="5" id="mfw-Id-cBQ"/>
                                                     </constraints>
-                                                </stackView>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ejH-Ul-pOU" firstAttribute="top" secondItem="0FW-mf-y17" secondAttribute="top" id="1Fc-LL-zvR"/>
-                                                <constraint firstAttribute="trailing" secondItem="ejH-Ul-pOU" secondAttribute="trailing" id="D7O-IN-PuZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="ejH-Ul-pOU" secondAttribute="bottom" constant="5" id="jaK-Wu-ysy"/>
-                                                <constraint firstItem="ejH-Ul-pOU" firstAttribute="leading" secondItem="0FW-mf-y17" secondAttribute="leading" id="q4w-8v-xwu"/>
+                                                <constraint firstItem="H8b-2q-Pjx" firstAttribute="leading" secondItem="0FW-mf-y17" secondAttribute="leading" id="GsI-P1-xbI"/>
+                                                <constraint firstAttribute="bottom" secondItem="H8b-2q-Pjx" secondAttribute="bottom" id="Raj-qK-1ri"/>
+                                                <constraint firstItem="H8b-2q-Pjx" firstAttribute="top" secondItem="0FW-mf-y17" secondAttribute="top" id="Xya-vq-q1G"/>
+                                                <constraint firstAttribute="trailing" secondItem="H8b-2q-Pjx" secondAttribute="trailing" id="qGQ-TU-d41"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -142,7 +153,7 @@
                                         <connections>
                                             <outlet property="image" destination="JSo-sY-XPc" id="aTL-TS-0yZ"/>
                                             <outlet property="title" destination="NNE-e6-uPB" id="mnj-6C-DHV"/>
-                                            <outlet property="widthConstraint" destination="x1B-pT-qdl" id="KIN-7f-oCE"/>
+                                            <outlet property="widthConstraint" destination="cPM-7j-yFP" id="4co-GO-K0t"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="loadingCell" id="8qY-da-PLq" customClass="LoadingCell" customModule="FlickrAPP" customModuleProvider="target">

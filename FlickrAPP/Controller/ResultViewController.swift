@@ -17,7 +17,7 @@ class ResultViewController: UIViewController, UICollectionViewDelegate, UICollec
     var nowPage = 1
     var photoList: [Photo] = []
     var isLoading = true
-    var photoCache = [Int: UIImage]()
+    var isLast = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,32 +40,51 @@ class ResultViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 1 && !isLoading && !isLast{
+            isLoading = true
+            self.loadPhotos()
+        }
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ResultCell.self)", for: indexPath) as! ResultCell
             cell.photo = photoList[indexPath.row]
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath) as! LoadingCell
-            cell.activityIndicator.startAnimating()
+            if !isLast {
+                cell.activityIndicator.startAnimating()
+            } else {
+                cell.activityIndicator.removeFromSuperview()
+            }
             return cell
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 && !isLoading {
-            isLoading = true
-            self.loadPhotos()
-        }
-    }
-    
-    
     // MARK: - Functions
     func loadPhotos() {
         PhotoService.getPhotos(page: String(nowPage), per_page: limit, text: search) { (photos) in
+            if photos?.photoList?.count ?? 0 < Int(self.limit)! {
+                self.isLast = true
+            }
             self.nowPage = Int(photos!.page ?? "1")! + 1
             self.photoList.append(contentsOf: photos!.photoList ?? [])
-            self.resultCollectionView.reloadSections([0])
-            self.isLoading = false
+            
+            if #available(iOS 13.0, *) {
+                self.resultCollectionView.reloadSections([0])
+            } else {
+                UIView.performWithoutAnimation {
+                    let loc = self.resultCollectionView.contentOffset
+                    self.resultCollectionView.reloadSections([0])
+                    self.resultCollectionView.contentOffset = loc
+                }
+            }
+            if self.nowPage == 2{
+                self.resultCollectionView.reloadSections([1])
+            }
+            
+            let seconds = 0.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                self.isLoading = false
+            }
         }
     }
 
