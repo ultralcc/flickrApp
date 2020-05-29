@@ -47,6 +47,16 @@ class ResultViewController: UIViewController, UICollectionViewDelegate, UICollec
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ResultCell.self)", for: indexPath) as! ResultCell
             cell.photo = photoList[indexPath.row]
+            cell.photoClickFn = { () in
+                let favoritePhotos = FavoritePhotoDAO().fetchFavorite()
+                if favoritePhotos?.contains(where: { (favoritePhoto) in favoritePhoto.photoUrl == cell.buildImageUrl()}) ?? false {
+                    self.showAlert(title: "等等...", message: "這個照片已經加入喜愛清單")
+                    return
+                }
+                FavoritePhotoDAO().savePhoto(title: cell.photo?.title ?? "", photoUrl: cell.buildImageUrl()){ () in
+                    self.showAlert(title: "太好了！", message: "加入喜愛清單成功")
+                }
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath) as! LoadingCell

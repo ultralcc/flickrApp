@@ -7,22 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class ResultCell: UICollectionViewCell {
     @IBOutlet var image: CustomImageView!
     @IBOutlet var title: UILabel!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+
+    var photoClickFn: (() -> Void)? = nil
+    
+    @IBAction func photoClick(_ sender: Any) {
+        (photoClickFn ?? { () in print("Photo Click Not Implement!")})()
+    }
     
     var cellTag: Int!
     static let width = floor((UIScreen.main.bounds.width - 3 * 1) / 2)
     
     var photo: Photo? {
         didSet{
-            let farm = String(photo!.farm ?? "")
-            let id = String(photo!.id ?? "")
-            let server = String(photo!.server ?? "")
-            let secret = String(photo!.secret ?? "")
-            setUpImage(farm: farm, id: id, server: server, secret: secret)
+            setUpImage()
             if photo?.title ?? "" == "" {
                 DispatchQueue.main.async() { [weak self] in
                     self?.title.text = "無標題"
@@ -35,24 +38,18 @@ class ResultCell: UICollectionViewCell {
         }
     }
     
-    func setUpImage(farm: String, id: String, server: String, secret: String){
-        let url = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+    func setUpImage(){
+        let url = buildImageUrl()
         image.downloaded(from: url)
     }
-    
-//    func setUpImage(farm: String, id: String, server: String, secret: String){
-//        guard let url = URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg") else { return }
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            if error != nil {
-//                print(error ?? "")
-//            }
-//
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.image.image = UIImage(data: data!)
-//            }
-//
-//        }.resume()
-//    }
+
+    func buildImageUrl() -> String {
+        let farm = String(photo!.farm ?? "")
+        let id = String(photo!.id ?? "")
+        let server = String(photo!.server ?? "")
+        let secret = String(photo!.secret ?? "")
+        return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
